@@ -1,7 +1,7 @@
 let should = require('should')
 
 let Backbone = require('backbone')
-let BackboneFunctional = require('../backbone-immutable')
+let BackboneFunctional = require('../backbone-functional')
 
 let CarCollection = require('./CarCollection')
 let Car = require('./Car')

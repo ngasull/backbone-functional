@@ -1,15 +1,15 @@
 {
-  "name": "backbone-immutable",
+  "name": "backbone-functional",
   "version": "0.1.0",
   "description": "Use Backbone models and collections without mutations: a smooth transition transition to immutability.",
-  "main": "backbone-immutable.js",
+  "main": "backbone-functional.js",
   "scripts": {
-    "test": "mocha --compilers js:babel/register src/spec/backbone-immutable.spec.js",
-    "test-watch": "mocha --compilers js:babel/register --watch src/spec/backbone-immutable.spec.js"
+    "test": "mocha --compilers js:babel/register src/spec/backbone-functional.spec.js",
+    "test-watch": "mocha --compilers js:babel/register --watch src/spec/backbone-functional.spec.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ngasull/backbone-immutable.git"
+    "url": "git+https://github.com/ngasull/backbone-functional.git"
   },
   "keywords": [
     "backbone",
@@ -21,9 +21,9 @@
   "author": "Nicolas Gasull",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ngasull/backbone-immutable/issues"
+    "url": "https://github.com/ngasull/backbone-functional/issues"
   },
-  "homepage": "https://github.com/ngasull/backbone-immutable#readme",
+  "homepage": "https://github.com/ngasull/backbone-functional#readme",
   "devDependencies": {
     "babel": "^5.8.23",
     "backbone": "^1.2.3",
