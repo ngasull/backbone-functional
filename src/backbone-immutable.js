@@ -60,6 +60,58 @@
 
     let BackboneImmutableCollection = (function() {
 
+        function hasBackboneModel(Collection) {
+            return !!Collection.__super__.model
+        }
+
+        function getList(Collection, models) {
+            if (hasBackboneModel(Collection))
+                return models.map((model) => model.attributes)
+            else
+                return models
+        }
+
+        function doCollectionMutation(name, Collection, list, ...args) {
+            let backboneCollection = makeModel(Collection, list)
+            backboneCollection[name].apply(backboneCollection, args)
+            return getList(Collection, backboneCollection.models)
+        }
+
+        function create(Collection, opts, list) {
+            // Backbone handles list copy
+            return getList(Collection, makeModel(Collection, opts, list).models)
+        }
+
+
+        function where(Collection, list, attrs) {
+            let backboneCollection = makeModel(Collection, list),
+                models = backboneCollection.where(attrs)
+            return getList(Collection, models)
+        }
+
+        function findWhere(Collection, list, attrs) {
+            let backboneCollection = makeModel(Collection, list),
+                model = backboneCollection.findWhere(attrs)
+
+            if (model) {
+                if (hasBackboneModel(Collection))
+                    return model.attributes
+                else
+                    return model
+            } else {
+                return null
+            }
+        }
+
+        let collectionMutationNames = [
+            'add', 'remove', 'push', 'pop', 'unshift', 'shift', 'sort'
+        ]
+
+        let collectionMutations = {}
+        collectionMutationNames.map((name) =>
+            collectionMutations[name] = doCollectionMutation.bind(null, name))
+
+        return { create, where, findWhere, ...collectionMutations }
     })()
 
     let BackboneImmutable = {
