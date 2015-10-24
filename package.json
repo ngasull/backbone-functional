@@ -1,0 +1,33 @@
+{
+  "name": "backbone-immutable",
+  "version": "0.1.0",
+  "description": "An Immutable wrapper to your Backbone models and collections",
+  "main": "backbone-immutable.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel/register src/spec/backbone-immutable.spec.js",
+    "test-watch": "mocha --compilers js:babel/register --watch src/spec/backbone-immutable.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngasull/backbone-immutable.git"
+  },
+  "keywords": [
+    "backbone",
+    "immutable",
+    "model",
+    "collection"
+  ],
+  "author": "Nicolas Gasull",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ngasull/backbone-immutable/issues"
+  },
+  "homepage": "https://github.com/ngasull/backbone-immutable#readme",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "backbone": "^1.2.3",
+    "mocha": "^2.3.3",
+    "should": "^7.1.1",
+    "underscore": "^1.8.3"
+  }
+}
