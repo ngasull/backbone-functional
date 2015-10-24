@@ -1,2 +1,2 @@
 # backbone-immutable
-An Immutable wrapper to your Backbone models and collections
+Use Backbone models and collections without mutations: a smooth transition transition to immutability.

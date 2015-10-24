@@ -6,7 +6,6 @@ let CarCollection = Backbone.Collection.extend({
 
     initialize: function(list, opts) {
         list.map((l) => l.brand = 'Ashton Martine')
-        Backbone.Collection.prototype.initialize.call(this, list, opts)
     }
 })
 

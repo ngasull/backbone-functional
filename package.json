@@ -1,7 +1,7 @@
 {
   "name": "backbone-immutable",
   "version": "0.1.0",
-  "description": "An Immutable wrapper to your Backbone models and collections",
+  "description": "Use Backbone models and collections without mutations: a smooth transition transition to immutability.",
   "main": "backbone-immutable.js",
   "scripts": {
     "test": "mocha --compilers js:babel/register src/spec/backbone-immutable.spec.js",
@@ -13,6 +13,7 @@
   },
   "keywords": [
     "backbone",
+    "functional",
     "immutable",
     "model",
     "collection"

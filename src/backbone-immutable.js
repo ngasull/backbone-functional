@@ -7,26 +7,26 @@
         Backbone = require('backbone')
     }
 
-    let BackboneImmutable = factory(Backbone)
+    let BackboneFunctional = factory(Backbone)
 
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports = BackboneImmutable
+        module.exports = BackboneFunctional
     } else {
-        window.BackboneImmutable = BackboneImmutable
+        window.BackboneFunctional = BackboneFunctional
     }
 
 })(function(Backbone) {
 
     function makeModel(Model, opts, attrs) {
 
-        if (arguments.length < 3)
+        if (typeof attrs === 'undefined')
             attrs = opts
             opts = null
 
         return new Model(attrs, opts)
     }
 
-    let BackboneImmutableModel = (function() {
+    let FunctionalModel = (function() {
 
         function create(Model, opts, attrs) {
             return makeModel(Model, attrs, opts).attributes
@@ -58,7 +58,7 @@
         return { create, set, doCall, doApply, invoke, alter }
     })()
 
-    let BackboneImmutableCollection = (function() {
+    let FunctionalCollection = (function() {
 
         function hasBackboneModel(Collection) {
             return !!Collection.__super__.model
@@ -114,12 +114,12 @@
         return { create, where, findWhere, ...collectionMutations }
     })()
 
-    let BackboneImmutable = {
-        ...BackboneImmutableCollection,
-        ...BackboneImmutableModel,
-        Collection: BackboneImmutableCollection,
-        Model: BackboneImmutableModel
+    let BackboneFunctional = {
+        ...FunctionalCollection,
+        ...FunctionalModel,
+        Collection: FunctionalCollection,
+        Model: FunctionalModel
     }
 
-    return BackboneImmutable
+    return BackboneFunctional
 })
