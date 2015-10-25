@@ -55,7 +55,14 @@
             return doApply(Model, attrs, fnName, args)[1]
         }
 
-        return { create, set, doCall, doApply, invoke, alter }
+        function fetch(Model, opts, attrs) {
+            let model = makeModel(Model, attrs, opts)
+            return model.fetch().then(() => {
+                return model.attributes
+            })
+        }
+
+        return { create, set, doCall, doApply, invoke, alter, fetch }
     })()
 
     let FunctionalCollection = (function() {
@@ -103,6 +110,13 @@
             }
         }
 
+        function fetch(Collection, opts, list) {
+            let collec = makeModel(Collection, list, opts)
+            return collec.fetch().then(() => {
+                return getList(Collection, collec.models)
+            })
+        }
+
         let collectionMutationNames = [
             'add', 'remove', 'push', 'pop', 'unshift', 'shift', 'sort'
         ]
@@ -111,7 +125,7 @@
         collectionMutationNames.map((name) =>
             collectionMutations[name] = doCollectionMutation.bind(null, name))
 
-        return { create, where, findWhere, ...collectionMutations }
+        return { create, where, findWhere, fetch, ...collectionMutations }
     })()
 
     let BackboneFunctional = {

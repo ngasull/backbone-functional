@@ -1,10 +1,20 @@
 let should = require('should')
 
+let $ = require('jquery')
 let Backbone = require('backbone')
 let BackboneFunctional = require('../backbone-functional')
 
 let CarCollection = require('./CarCollection')
 let Car = require('./Car')
+
+Backbone.$ = $
+
+$.ajax = (opts) => {
+    opts.success({ foo: 'bar', url: opts.url })
+    return new Promise((resolve) => {
+        resolve()
+    })
+}
 
 describe('BackboneFunctional', () => {
 
@@ -108,6 +118,25 @@ describe('BackboneFunctional', () => {
             carV2.should.not.equal(carV1)
             carV1.kilometers.should.equal(0)
             carV2.kilometers.should.equal(42)
+        })
+
+        it('#fetch triggers an ajax call using model\'s configuration', () => {
+
+            return fnModel.fetch(Car, {
+                color: 'indigo',
+                edition: 'GTX'
+            }).then((car) => {
+                car.should.have.properties({
+                    color: 'indigo',
+                    edition: 'GTX',
+                    year: 2015,
+                    seats: 4,
+                    serverAttrs: {
+                        foo: 'bar',
+                        url: 'foo/year/2015/seats/4'
+                    }
+                })
+            })
         })
     })
 
@@ -276,6 +305,23 @@ describe('BackboneFunctional', () => {
                 kilometers: 0,
                 seats: 4
             }])
+        })
+
+        it('#fetch triggers an ajax call using collection\'s configuration', () => {
+
+            return fnCollection.fetch(CarCollection, []).then((collec) => {
+                collec.length.should.equal(1)
+                collec[0].should.have.properties({
+                    color: 'white',
+                    year: 2015,
+                    seats: 5,
+                    kilometers: 0,
+                })
+                collec[0].serverAttrs.should.have.properties({
+                    foo: 'bar',
+                    url: 'bar/brand/Ashton-Martine'
+                })
+            })
         })
     })
 

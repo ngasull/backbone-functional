@@ -11,6 +11,16 @@ let Car = Backbone.Model.extend({
         }
     },
 
+    url: function() {
+        return `foo/year/${this.get('year')}/seats/${this.get('seats')}`
+    },
+
+    parse: function(data) {
+        return {
+            serverAttrs: data
+        }
+    },
+
     initialize: function() {
         if (this.get('edition') === 'GTX') {
             this.set('seats', 4)
